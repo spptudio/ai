@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>spptudio — Visual Artist</title>
+<style>
+  :root{
+    --bg: #1c1b1a;
+    --bg-elevated: #262422;
+    --fg: #f3f0ea;
+    --fg-dim: #8a8580;
+    --accent: #e8b13a;
+    --line: rgba(243,240,234,0.08);
+    --serif: -apple-system, "Pretendard", "Helvetica Neue", Arial, sans-serif;
+    --sans: -apple-system, "Pretendard", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:var(--sans);
+    font-weight:400;
+    line-height:1.6;
+    word-break:keep-all;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* film grain overlay */
+  body::after{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:999;
+    opacity:0.035;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0;
+    z-index:100;
+    background:rgba(10,10,11,0.75);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 32px;
+    max-width:1200px;
+    margin:0 auto;
+  }
+  .logo{
+    font-family:var(--serif);
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .nav-links{ display:flex; gap:36px; }
+  .nav-links a{
+    font-size:13px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--fg-dim);
+    transition:color 0.25s;
+  }
+  .nav-links a:hover{ color:var(--fg); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:88vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:140px 0 80px;
+    position:relative;
+  }
+  .hero-eyebrow{
+    font-size:13px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:28px;
+  }
+  .hero h1{
+    font-family:var(--serif);
+    font-size:clamp(40px, 7vw, 88px);
+    font-weight:700;
+    line-height:1.04;
+    letter-spacing:-0.02em;
+    max-width:16ch;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--accent);
+  }
+  .hero-sub{
+    margin-top:40px;
+    max-width:520px;
+    font-size:17px;
+    color:#bdbab3;
+    line-height:1.8;
+  }
+  .hero-role{
+    margin-top:48px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px 28px;
+    font-size:13px;
+    letter-spacing:0.05em;
+    color:var(--fg-dim);
+  }
+  .hero-role span{ color:var(--fg); }
+
+  /* ---------- Section heading ---------- */
+  .section{
+    padding:100px 0;
+    border-top:1px solid var(--line);
+  }
+  .section.sub-section{
+    padding:64px 0;
+  }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:64px;
+    gap:24px;
+  }
+  .sub-section .section-head{
+    margin-bottom:36px;
+  }
+  .section-title{
+    font-family:var(--serif);
+    font-size:clamp(32px, 5vw, 56px);
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .section-title.sub{
+    font-size:clamp(22px, 3vw, 32px);
+  }
+  .section-note{
+    font-size:13px;
+    color:var(--fg-dim);
+    text-align:right;
+    max-width:280px;
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- Works grid ---------- */
+  .works-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:2px;
+    background:var(--line);
+  }
+  .work-card{
+    background:var(--bg);
+    padding:24px;
+    position:relative;
+    overflow:hidden;
+    aspect-ratio:16/9;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+  }
+  .work-card .work-frame{
+    position:absolute;
+    top:50%; left:50%;
+    width:100%; height:100%;
+    transform:translate(-50%, -50%);
+    border:0;
+    pointer-events:none;
+  }
+  .work-card::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(28,27,26,0) 55%, rgba(28,27,26,0.8) 100%);
+    z-index:1;
+  }
+  .work-meta{
+    position:relative;
+    z-index:2;
+  }
+  .work-type{
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  .work-title{
+    font-family:var(--serif);
+    font-size:24px;
+    font-weight:700;
+  }
+  .work-card .work-arrow{
+    position:absolute;
+    top:24px; right:24px;
+    z-index:2;
+    width:40px; height:40px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    color:var(--fg-dim);
+    opacity:0;
+    transform:translate(-6px, 6px);
+    transition:all 0.3s;
+  }
+  .work-card .work-arrow::after{ content:"↗"; }
+  .work-card:hover .work-arrow{
+    opacity:1;
+    transform:translate(0,0);
+    border-color:var(--accent);
+    color:var(--accent);
+  }
+
+  /* ---------- Process ---------- */
+  .process-flow{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    font-size:16px;
+    color:var(--fg-dim);
+    line-height:2;
+  }
+
+  .tools-line{
+    margin-top:48px;
+    font-size:14px;
+    color:var(--fg-dim);
+    letter-spacing:0.04em;
+    line-height:2.2;
+  }
+  .tools-line strong{
+    color:var(--fg);
+    font-weight:400;
+    display:block;
+    margin-bottom:14px;
+    font-size:13px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+  }
+
+  /* ---------- Work with me ---------- */
+  .offer-line{
+    font-size:16px;
+    color:var(--fg-dim);
+    line-height:2;
+    max-width:80ch;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact{
+    padding:160px 0;
+    text-align:center;
+  }
+  .contact-title{
+    font-family:var(--serif);
+    font-size:clamp(40px, 8vw, 96px);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin-bottom:48px;
+    line-height:1.1;
+    color:var(--accent);
+  }
+  .contact-links{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    align-items:center;
+  }
+  .contact-links a{
+    font-size:18px;
+    padding:14px 36px;
+    border:1px solid var(--line);
+    border-radius:100px;
+    transition:all 0.3s;
+    letter-spacing:0.02em;
+  }
+  .contact-links a:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+  }
+  .contact-links a.primary{
+    background:var(--accent);
+    color:#1c1b1a;
+    border-color:var(--accent);
+    font-weight:700;
+  }
+  .contact-links a.primary:hover{
+    background:transparent;
+    color:var(--accent);
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0;
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    letter-spacing:0.1em;
+    color:var(--fg-dim);
+    text-transform:uppercase;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .wrap{ padding:0 20px; }
+    .nav{ padding:20px; }
+    .works-grid{ grid-template-columns:1fr; }
+    .section-head{ flex-direction:column; align-items:flex-start; gap:16px; }
+    .section-note{ text-align:left; }
+    .hero{ padding-top:120px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#top" class="logo">spp.</a>
+    <div class="nav-links">
+      <a href="#works">Works</a>
+      <a href="#process">Process</a>
+      <a href="#offer">Work With Me</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero-eyebrow">spptudio — visual artist</div>
+    <h1>Visual Stories</h1>
+    <p class="hero-sub">
+      브랜드 필름, 광고 영상, SNS 콘텐츠를 제작합니다.
+      생성형 AI와 비주얼 디렉팅을 결합해 빠르고 밀도 높은 영상 결과물을 만듭니다.
+    </p>
+    <div class="hero-role">
+      <div>Role — <span>Creative Direction · AI Visual · Motion · Editing</span></div>
+      <div>Scope — <span>End-to-end Production</span></div>
+    </div>
+  </section>
+
+  <!-- Works -->
+  <section class="section" id="works">
+    <div class="section-head">
+      <h2 class="section-title">Works</h2>
+      <p class="section-note">카드를 클릭하면 작업 상세 페이지로 이동합니다.</p>
+    </div>
+
+    <div class="works-grid">
+
+      <a class="work-card" href="works/ridin-bass.html">
+        <iframe class="work-frame" src="https://player.vimeo.com/video/1200097412?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="RIDIN' BASS"></iframe>
+        <div class="work-arrow"></div>
+        <div class="work-meta">
+          <div class="work-type">Brand Film</div>
+          <div class="work-title">RIDIN' BASS</div>
+        </div>
+      </a>
+
+      <a class="work-card" href="works/eve.html">
+        <iframe class="work-frame" src="https://player.vimeo.com/video/1200106661?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="괜찮아, 함께니까 — 이브(EVE)"></iframe>
+        <div class="work-arrow"></div>
+        <div class="work-meta">
+          <div class="work-type">Music Video</div>
+          <div class="work-title">괜찮아, 함께니까 — 이브(EVE)</div>
+        </div>
+      </a>
+
+      <a class="work-card" href="works/bensimon.html">
+        <iframe class="work-frame" src="https://player.vimeo.com/video/1194954992?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="BENSIMON — Color arrives quietly"></iframe>
+        <div class="work-arrow"></div>
+        <div class="work-meta">
+          <div class="work-type">Brand Film</div>
+          <div class="work-title">BENSIMON — Color arrives quietly</div>
+        </div>
+      </a>
+
+      <a class="work-card" href="works/coco-tok.html">
+        <iframe class="work-frame" src="https://player.vimeo.com/video/1188563673?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Coco Tok — Tropical Ice Cream Motion"></iframe>
+        <div class="work-arrow"></div>
+        <div class="work-meta">
+          <div class="work-type">Commercial Film</div>
+          <div class="work-title">Coco Tok — Tropical Ice Cream Motion</div>
+        </div>
+      </a>
+
+      <a class="work-card" href="works/dewy-pop.html">
+        <iframe class="work-frame" src="https://player.vimeo.com/video/1188567008?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Dewy Pop — Cosmetic Film"></iframe>
+        <div class="work-arrow"></div>
+        <div class="work-meta">
+          <div class="work-type">Commercial Film</div>
+          <div class="work-title">Dewy Pop — Cosmetic Film</div>
+        </div>
+      </a>
+
+      <a class="work-card" href="works/eddy.html">
+        <iframe class="work-frame" src="https://player.vimeo.com/video/1188567745?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Eddy — AI Short Film"></iframe>
+        <div class="work-arrow"></div>
+        <div class="work-meta">
+          <div class="work-type">Short Film</div>
+          <div class="work-title">Eddy — AI Short Film</div>
+        </div>
+      </a>
+
+      <a class="work-card" href="works/lumen-rail.html">
+        <iframe class="work-frame" src="https://player.vimeo.com/video/1200105933?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Lumen Rail — Reveal Trailer"></iframe>
+        <div class="work-arrow"></div>
+        <div class="work-meta">
+          <div class="work-type">Game Trailer</div>
+          <div class="work-title">Lumen Rail — Reveal Trailer</div>
+        </div>
+      </a>
+
+      <a class="work-card" href="works/breadopia.html">
+        <iframe class="work-frame" src="https://player.vimeo.com/video/1200103575?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Breadopia"></iframe>
+        <div class="work-arrow"></div>
+        <div class="work-meta">
+          <div class="work-type">Short Clip</div>
+          <div class="work-title">Breadopia</div>
+        </div>
+      </a>
+
+      <a class="work-card" href="works/furry-drop.html">
+        <iframe class="work-frame" src="https://player.vimeo.com/video/1199617668?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="The Furry Drop — AI Music Video"></iframe>
+        <div class="work-arrow"></div>
+        <div class="work-meta">
+          <div class="work-type">Short-form Video</div>
+          <div class="work-title">The Furry Drop — AI Music Video</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section sub-section" id="process">
+    <div class="section-head">
+      <h2 class="section-title sub">Process</h2>
+    </div>
+
+    <div class="process-flow">
+      <span>Direction</span>
+      <span>Visual Development</span>
+      <span>Motion Generation</span>
+      <span>Edit &amp; Post-production</span>
+      <span>Delivery</span>
+    </div>
+
+    <div class="tools-line">
+      <strong>Tools</strong>
+      ChatGPT · Gemini Omni · Midjourney · Kling · Seedance · Nano Banana · Premiere · After Effects · Photoshop
+    </div>
+  </section>
+
+  <!-- Work With Me -->
+  <section class="section sub-section" id="offer">
+    <div class="section-head">
+      <h2 class="section-title sub">Work With Me</h2>
+    </div>
+    <p class="offer-line">브랜드 필름 · SNS 숏폼 · 애니메이션 · 컨셉 영상 · 뮤직비디오 · 비주얼 실험 콘텐츠</p>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2 class="contact-title">Get In Touch</h2>
+    <div class="contact-links">
+      <a href="https://open.kakao.com/o/sGn6umbd" target="_blank" rel="noopener" class="primary">카카오 오픈채팅으로 문의</a>
+      <a href="mailto:spptudio@gmail.com">spptudio@gmail.com</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>spptudio © 2026</span>
+  <span>Visual Artist</span>
+</footer>
+
+</body>
+</html>
