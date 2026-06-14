@@ -174,6 +174,8 @@
   }
   .work-card{
     background:var(--bg);
+    background-size:cover;
+    background-position:center;
     padding:24px;
     position:relative;
     overflow:hidden;
@@ -189,6 +191,11 @@
     transform:translate(-50%, -50%);
     border:0;
     pointer-events:none;
+    opacity:0;
+    transition:opacity 0.3s ease;
+  }
+  .work-card.is-active .work-frame{
+    opacity:1;
   }
   .work-card::before{
     content:"";
@@ -386,8 +393,8 @@
 
     <div class="works-grid">
 
-      <a class="work-card" href="works/ridin-bass.html">
-        <iframe class="work-frame" src="https://player.vimeo.com/video/1200097412?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="RIDIN' BASS"></iframe>
+      <a class="work-card" href="works/ridin-bass.html" style="background-image:url('https://vumbnail.com/1200097412.jpg')">
+        <iframe class="work-frame" data-src="https://player.vimeo.com/video/1200097412?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="RIDIN' BASS"></iframe>
         <div class="work-arrow"></div>
         <div class="work-meta">
           <div class="work-type">Brand Film</div>
@@ -395,8 +402,8 @@
         </div>
       </a>
 
-      <a class="work-card" href="works/eve.html">
-        <iframe class="work-frame" src="https://player.vimeo.com/video/1200106661?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="괜찮아, 함께니까 — 이브(EVE)"></iframe>
+      <a class="work-card" href="works/eve.html" style="background-image:url('https://vumbnail.com/1200106661.jpg')">
+        <iframe class="work-frame" data-src="https://player.vimeo.com/video/1200106661?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="괜찮아, 함께니까 — 이브(EVE)"></iframe>
         <div class="work-arrow"></div>
         <div class="work-meta">
           <div class="work-type">Music Video</div>
@@ -404,8 +411,8 @@
         </div>
       </a>
 
-      <a class="work-card" href="works/bensimon.html">
-        <iframe class="work-frame" src="https://player.vimeo.com/video/1194954992?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="BENSIMON — Color arrives quietly"></iframe>
+      <a class="work-card" href="works/bensimon.html" style="background-image:url('https://vumbnail.com/1194954992.jpg')">
+        <iframe class="work-frame" data-src="https://player.vimeo.com/video/1194954992?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="BENSIMON — Color arrives quietly"></iframe>
         <div class="work-arrow"></div>
         <div class="work-meta">
           <div class="work-type">Brand Film</div>
@@ -413,8 +420,8 @@
         </div>
       </a>
 
-      <a class="work-card" href="works/coco-tok.html">
-        <iframe class="work-frame" src="https://player.vimeo.com/video/1188563673?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Coco Tok — Tropical Ice Cream Motion"></iframe>
+      <a class="work-card" href="works/coco-tok.html" style="background-image:url('https://vumbnail.com/1188563673.jpg')">
+        <iframe class="work-frame" data-src="https://player.vimeo.com/video/1188563673?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Coco Tok — Tropical Ice Cream Motion"></iframe>
         <div class="work-arrow"></div>
         <div class="work-meta">
           <div class="work-type">Commercial Film</div>
@@ -422,8 +429,8 @@
         </div>
       </a>
 
-      <a class="work-card" href="works/dewy-pop.html">
-        <iframe class="work-frame" src="https://player.vimeo.com/video/1188567008?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Dewy Pop — Cosmetic Film"></iframe>
+      <a class="work-card" href="works/dewy-pop.html" style="background-image:url('https://vumbnail.com/1188567008.jpg')">
+        <iframe class="work-frame" data-src="https://player.vimeo.com/video/1188567008?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Dewy Pop — Cosmetic Film"></iframe>
         <div class="work-arrow"></div>
         <div class="work-meta">
           <div class="work-type">Commercial Film</div>
@@ -431,8 +438,8 @@
         </div>
       </a>
 
-      <a class="work-card" href="works/eddy.html">
-        <iframe class="work-frame" src="https://player.vimeo.com/video/1188567745?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Eddy — AI Short Film"></iframe>
+      <a class="work-card" href="works/eddy.html" style="background-image:url('https://vumbnail.com/1188567745.jpg')">
+        <iframe class="work-frame" data-src="https://player.vimeo.com/video/1188567745?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Eddy — AI Short Film"></iframe>
         <div class="work-arrow"></div>
         <div class="work-meta">
           <div class="work-type">Short Film</div>
@@ -440,8 +447,8 @@
         </div>
       </a>
 
-      <a class="work-card" href="works/lumen-rail.html">
-        <iframe class="work-frame" src="https://player.vimeo.com/video/1200105933?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Lumen Rail — Reveal Trailer"></iframe>
+      <a class="work-card" href="works/lumen-rail.html" style="background-image:url('https://vumbnail.com/1200105933.jpg')">
+        <iframe class="work-frame" data-src="https://player.vimeo.com/video/1200105933?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Lumen Rail — Reveal Trailer"></iframe>
         <div class="work-arrow"></div>
         <div class="work-meta">
           <div class="work-type">Game Trailer</div>
@@ -449,8 +456,8 @@
         </div>
       </a>
 
-      <a class="work-card" href="works/breadopia.html">
-        <iframe class="work-frame" src="https://player.vimeo.com/video/1200103575?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Breadopia"></iframe>
+      <a class="work-card" href="works/breadopia.html" style="background-image:url('https://vumbnail.com/1200103575.jpg')">
+        <iframe class="work-frame" data-src="https://player.vimeo.com/video/1200103575?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Breadopia"></iframe>
         <div class="work-arrow"></div>
         <div class="work-meta">
           <div class="work-type">Short Clip</div>
@@ -458,8 +465,8 @@
         </div>
       </a>
 
-      <a class="work-card" href="works/furry-drop.html">
-        <iframe class="work-frame" src="https://player.vimeo.com/video/1199617668?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="The Furry Drop — AI Music Video"></iframe>
+      <a class="work-card" href="works/furry-drop.html" style="background-image:url('https://vumbnail.com/1199617668.jpg')">
+        <iframe class="work-frame" data-src="https://player.vimeo.com/video/1199617668?background=1&muted=1&loop=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="The Furry Drop — AI Music Video"></iframe>
         <div class="work-arrow"></div>
         <div class="work-meta">
           <div class="work-type">Short-form Video</div>
@@ -513,6 +520,27 @@
   <span>spptudio © 2026</span>
   <span>Visual Artist</span>
 </footer>
+
+<script>
+  document.querySelectorAll('.work-card').forEach(card => {
+    const frame = card.querySelector('.work-frame');
+    const src = frame.getAttribute('data-src');
+    let loaded = false;
+    const activate = () => {
+      if (!loaded) {
+        frame.src = src;
+        loaded = true;
+      }
+      card.classList.add('is-active');
+    };
+    const deactivate = () => {
+      card.classList.remove('is-active');
+    };
+    card.addEventListener('mouseenter', activate);
+    card.addEventListener('mouseleave', deactivate);
+    card.addEventListener('touchstart', activate, { passive: true });
+  });
+</script>
 
 </body>
 </html>
