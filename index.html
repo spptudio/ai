@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SPPTUDIO</title>
+<title>spptudio — AI Video Production</title>
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="icons/favicon-180.png">
@@ -33,7 +33,6 @@
     -webkit-font-smoothing:antialiased;
   }
 
-  /* film grain overlay */
   body::after{
     content:"";
     position:fixed; inset:0;
@@ -52,7 +51,6 @@
     padding:0 32px;
   }
 
-  /* ---------- Header ---------- */
   header{
     position:sticky; top:0;
     z-index:100;
@@ -60,6 +58,7 @@
     backdrop-filter:blur(12px);
     border-bottom:1px solid var(--line);
   }
+
   .nav{
     display:flex;
     align-items:center;
@@ -68,13 +67,16 @@
     max-width:1200px;
     margin:0 auto;
   }
+
   .logo{
     font-family:var(--serif);
     font-size:20px;
     font-weight:700;
     letter-spacing:-0.01em;
   }
+
   .nav-links{ display:flex; gap:36px; }
+
   .nav-links a{
     font-size:13px;
     letter-spacing:0.12em;
@@ -82,9 +84,9 @@
     color:var(--fg-dim);
     transition:color 0.25s;
   }
+
   .nav-links a:hover{ color:var(--fg); }
 
-  /* ---------- Hero ---------- */
   .hero{
     min-height:88vh;
     display:flex;
@@ -93,6 +95,7 @@
     padding:140px 0 80px;
     position:relative;
   }
+
   .hero-eyebrow{
     font-size:13px;
     letter-spacing:0.25em;
@@ -100,6 +103,7 @@
     color:var(--accent);
     margin-bottom:28px;
   }
+
   .hero h1{
     font-family:var(--serif);
     font-size:clamp(40px, 7vw, 88px);
@@ -108,10 +112,12 @@
     letter-spacing:-0.02em;
     max-width:16ch;
   }
+
   .hero h1 em{
     font-style:normal;
     color:var(--accent);
   }
+
   .hero-sub{
     margin-top:40px;
     max-width:520px;
@@ -119,6 +125,7 @@
     color:#bdbab3;
     line-height:1.8;
   }
+
   .hero-role{
     margin-top:48px;
     display:flex;
@@ -128,16 +135,55 @@
     letter-spacing:0.05em;
     color:var(--fg-dim);
   }
+
   .hero-role span{ color:var(--fg); }
 
-  /* ---------- Section heading ---------- */
+  .hero-cta{
+    margin-top:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:48px;
+    padding:0 24px;
+    border:1px solid var(--line);
+    border-radius:100px;
+    font-size:14px;
+    letter-spacing:0.02em;
+    transition:all 0.3s;
+  }
+
+  .btn.primary{
+    background:var(--accent);
+    color:#1c1b1a;
+    border-color:var(--accent);
+    font-weight:700;
+  }
+
+  .btn:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+  }
+
+  .btn.primary:hover{
+    background:transparent;
+    color:var(--accent);
+  }
+
   .section{
     padding:100px 0;
     border-top:1px solid var(--line);
   }
+
   .section.sub-section{
     padding:64px 0;
   }
+
   .section-head{
     display:flex;
     justify-content:space-between;
@@ -145,18 +191,22 @@
     margin-bottom:64px;
     gap:24px;
   }
+
   .sub-section .section-head{
     margin-bottom:36px;
   }
+
   .section-title{
     font-family:var(--serif);
     font-size:clamp(32px, 5vw, 56px);
     font-weight:700;
     letter-spacing:-0.01em;
   }
+
   .section-title.sub{
     font-size:clamp(22px, 3vw, 32px);
   }
+
   .section-note{
     font-size:13px;
     color:var(--fg-dim);
@@ -165,13 +215,13 @@
     letter-spacing:0.02em;
   }
 
-  /* ---------- Works grid ---------- */
   .works-grid{
     display:grid;
     grid-template-columns:repeat(2, 1fr);
     gap:2px;
     background:var(--line);
   }
+
   .work-card{
     background:var(--bg);
     background-size:cover;
@@ -184,6 +234,7 @@
     flex-direction:column;
     justify-content:flex-end;
   }
+
   .work-card .work-frame{
     position:absolute;
     top:50%; left:50%;
@@ -194,19 +245,23 @@
     opacity:0;
     transition:opacity 0.3s ease;
   }
+
   .work-card.is-active .work-frame{
     opacity:1;
   }
+
   .work-card::before{
     content:"";
     position:absolute; inset:0;
     background:linear-gradient(180deg, rgba(28,27,26,0) 55%, rgba(28,27,26,0.8) 100%);
     z-index:1;
   }
+
   .work-meta{
     position:relative;
     z-index:2;
   }
+
   .work-type{
     font-size:12px;
     letter-spacing:0.18em;
@@ -214,11 +269,13 @@
     color:var(--accent);
     margin-bottom:8px;
   }
+
   .work-title{
     font-family:var(--serif);
     font-size:24px;
     font-weight:700;
   }
+
   .work-card .work-arrow{
     position:absolute;
     top:24px; right:24px;
@@ -235,7 +292,9 @@
     transform:translate(-6px, 6px);
     transition:all 0.3s;
   }
+
   .work-card .work-arrow::after{ content:"↗"; }
+
   .work-card:hover .work-arrow{
     opacity:1;
     transform:translate(0,0);
@@ -243,7 +302,6 @@
     color:var(--accent);
   }
 
-  /* ---------- Process ---------- */
   .process-flow{
     display:flex;
     flex-direction:column;
@@ -260,6 +318,7 @@
     letter-spacing:0.04em;
     line-height:2.2;
   }
+
   .tools-line strong{
     color:var(--fg);
     font-weight:400;
@@ -270,7 +329,54 @@
     text-transform:uppercase;
   }
 
-  /* ---------- Work with me ---------- */
+  .service-list{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:2px;
+    background:var(--line);
+  }
+
+  .service-card{
+    background:var(--bg);
+    padding:32px;
+    min-height:220px;
+  }
+
+  .service-card h3{
+    font-family:var(--serif);
+    font-size:22px;
+    margin-bottom:18px;
+  }
+
+  .service-card p{
+    font-size:15px;
+    color:var(--fg-dim);
+    line-height:1.8;
+  }
+
+  .quote-box{
+    margin-top:36px;
+    padding:32px;
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:20px;
+  }
+
+  .quote-box strong{
+    display:block;
+    color:var(--fg);
+    font-size:15px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+
+  .quote-box p{
+    font-size:16px;
+    color:#bdbab3;
+    line-height:1.9;
+  }
+
   .offer-line{
     font-size:16px;
     color:var(--fg-dim);
@@ -278,11 +384,11 @@
     max-width:80ch;
   }
 
-  /* ---------- Contact ---------- */
   .contact{
     padding:160px 0;
     text-align:center;
   }
+
   .contact-title{
     font-family:var(--serif);
     font-size:clamp(40px, 8vw, 96px);
@@ -292,12 +398,14 @@
     line-height:1.1;
     color:var(--accent);
   }
+
   .contact-links{
     display:flex;
     flex-direction:column;
     gap:18px;
     align-items:center;
   }
+
   .contact-links a{
     font-size:18px;
     padding:14px 36px;
@@ -306,16 +414,19 @@
     transition:all 0.3s;
     letter-spacing:0.02em;
   }
+
   .contact-links a:hover{
     border-color:var(--accent);
     color:var(--accent);
   }
+
   .contact-links a.primary{
     background:var(--accent);
     color:#1c1b1a;
     border-color:var(--accent);
     font-weight:700;
   }
+
   .contact-links a.primary:hover{
     background:transparent;
     color:var(--accent);
@@ -333,17 +444,15 @@
     text-transform:uppercase;
   }
 
-  /* ---------- Responsive ---------- */
   @media (max-width: 860px){
     .nav-links{ display:none; }
     .wrap{ padding:0 20px; }
     .nav{ padding:20px; }
     .works-grid{ grid-template-columns:1fr; }
+    .service-list{ grid-template-columns:1fr; }
     .section-head{ flex-direction:column; align-items:flex-start; gap:16px; }
     .section-note{ text-align:left; }
     .hero{ padding-top:120px; }
-    .hero-role{ flex-direction:column; gap:10px; font-size:12px; }
-    .hero-eyebrow{ letter-spacing:0.12em; font-size:12px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -364,7 +473,7 @@
     <div class="nav-links">
       <a href="#works">Works</a>
       <a href="#process">Process</a>
-      <a href="#offer">Work With Me</a>
+      <a href="#offer">Service</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
@@ -372,21 +481,24 @@
 
 <main class="wrap">
 
-  <!-- Hero -->
   <section class="hero" id="top">
-    <div class="hero-eyebrow">Visual Artist — Concept to screen</div>
-    <h1>SPPTUDIO</h1>
+    <div class="hero-eyebrow">spptudio — AI video production</div>
+    <h1>Visual Stories<br><em>for Brands</em></h1>
     <p class="hero-sub">
-      브랜드 필름, 광고 영상, SNS 콘텐츠를 제작합니다.
-      생성형 AI와 비주얼 디렉팅을 결합해 빠르고 밀도 높은 영상 결과물을 만듭니다.
+      브랜드 필름, 광고 영상, SNS 콘텐츠를 제작합니다.<br>
+      생성형 AI와 비주얼 디렉팅을 통해
+      빠르고 밀도 높은 영상을 만듭니다.
     </p>
     <div class="hero-role">
-      <div>Role — <span>Creative Direction · AI Visual · Motion · Editing</span></div>
-      <div>Scope — <span>End-to-end Production</span></div>
+      <div>Service — <span>Brand Film · Commercial · SNS Short-form · Music Video</span></div>
+      <div>Scope — <span>Direction · AI Visual · Motion · Editing</span></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn primary">프로젝트 문의하기</a>
+      <a href="#works" class="btn">작업 보기</a>
     </div>
   </section>
 
-  <!-- Works -->
   <section class="section" id="works">
     <div class="section-head">
       <h2 class="section-title">Works</h2>
@@ -479,7 +591,6 @@
     </div>
   </section>
 
-  <!-- Process -->
   <section class="section sub-section" id="process">
     <div class="section-head">
       <h2 class="section-title sub">Process</h2>
@@ -499,19 +610,40 @@
     </div>
   </section>
 
-  <!-- Work With Me -->
   <section class="section sub-section" id="offer">
     <div class="section-head">
-      <h2 class="section-title sub">Work With Me</h2>
+      <h2 class="section-title sub">Service</h2>
     </div>
-    <p class="offer-line">브랜드 필름 · SNS 숏폼 · 애니메이션 · 컨셉 영상 · 뮤직비디오 · 비주얼 실험 콘텐츠</p>
+
+    <div class="service-list">
+      <div class="service-card">
+        <h3>Brand Film</h3>
+        <p>브랜드의 무드와 메시지를 영상으로 설계합니다. 웹사이트, 캠페인, 런칭 콘텐츠에 어울리는 비주얼 중심의 브랜드 필름을 제작합니다.</p>
+      </div>
+      <div class="service-card">
+        <h3>Commercial / SNS</h3>
+        <p>광고 영상, 숏폼, 제품 소개 콘텐츠를 제작합니다. 핵심 메시지가 선명하게 전달되도록 콘셉트, 장면 구성, 편집 흐름을 함께 잡습니다.</p>
+      </div>
+      <div class="service-card">
+        <h3>Music Video / Visual</h3>
+        <p>뮤직비디오, 컨셉 영상, 비주얼 실험 콘텐츠를 제작합니다. 작품의 의도에 맞는 장면 세계관과 이미지 톤을 구성합니다.</p>
+      </div>
+    </div>
+
+    <div class="quote-box">
+      <strong>How to Start</strong>
+      <p>프로젝트의 목적, 영상 길이, 레퍼런스, 납기일을 보내주시면 작업 범위에 맞춰 제작 방식과 견적을 안내드립니다.</p>
+    </div>
   </section>
 
-  <!-- Contact -->
   <section class="contact" id="contact">
     <h2 class="contact-title">Get In Touch</h2>
+    <p class="offer-line" style="margin:0 auto 40px; text-align:center; max-width:700px;">
+      브랜드 필름, 광고 영상, SNS 콘텐츠 제작 문의를 받고 있습니다.
+      프로젝트 개요와 레퍼런스를 보내주시면 빠르게 답변드립니다.
+    </p>
     <div class="contact-links">
-      <a href="https://open.kakao.com/o/sGn6umbd" target="_blank" rel="noopener" class="primary">카카오 오픈채팅</a>
+      <a href="https://open.kakao.com/o/sGn6umbd" target="_blank" rel="noopener" class="primary">프로젝트 문의하기</a>
       <a href="mailto:spptudio@gmail.com">spptudio@gmail.com</a>
     </div>
   </section>
@@ -520,7 +652,7 @@
 
 <footer class="wrap">
   <span>spptudio © 2026</span>
-  <span>Visual Artist</span>
+  <span>AI Video Production</span>
 </footer>
 
 <script>
@@ -528,6 +660,7 @@
     const frame = card.querySelector('.work-frame');
     const src = frame.getAttribute('data-src');
     let loaded = false;
+
     const activate = () => {
       if (!loaded) {
         frame.src = src;
@@ -535,9 +668,11 @@
       }
       card.classList.add('is-active');
     };
+
     const deactivate = () => {
       card.classList.remove('is-active');
     };
+
     card.addEventListener('mouseenter', activate);
     card.addEventListener('mouseleave', deactivate);
     card.addEventListener('touchstart', activate, { passive: true });
