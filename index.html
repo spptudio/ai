@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SPPTUDIO — AI 비주얼 아티스트 spp</title>
+<title>SPPTUDIO</title>
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="icons/favicon-180.png">
@@ -241,27 +241,34 @@
     background-position:center;
     padding:24px;
     position:relative;
-    overflow:hidden;
     aspect-ratio:16/9;
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
     border-radius: 12px;
     border: 1px solid var(--line);
+    
+    /* 💡 테두리 버그 완벽 해결을 위한 핵심 마스킹 레이어 속성 추가 */
+    overflow: hidden;
+    isolation: isolate;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
   }
 
   .work-card .work-frame{
     position:absolute;
     top:50%; left:50%;
-    width:100%; height:100%;
-    /* 💡 영상 외곽 미세 테두리 버그 해결을 위해 1.02배 확대 및 object-fit/outline 추가 */
-    transform:translate(-50%, -50%) scale(1.02);
+    width:101%; height:101%;
+    /* 💡 하드웨어 가속 및 의도적인 1.015배 스케일 업으로 비메오 고유의 흰색 레터박스/테두리 버그 완전 마스킹 */
+    transform:translate(-50%, -50%) scale(1.015);
     object-fit: cover;
     outline: none;
-    border:0;
+    border: none;
     pointer-events:none;
     opacity:0;
     transition:opacity 0.3s ease;
+    z-index: 0;
   }
 
   .work-card.is-active .work-frame{
@@ -506,7 +513,7 @@
     <h1>트렌디한 브랜드 비주얼,<br><em>생성형 AI 영상</em>으로 실현합니다.</h1>
     <p class="hero-sub">
       감각적인 브랜드 필름, 몰입감 높은 광고, SNS 숏폼 영상까지.<br>
-      검증된 비주얼 디렉팅 역량และ AI 기술을 결합하여 압도적인 속도와 밀도의 영상 컨텐츠를 제작하는 아티스트 <strong>spp(스프)</strong>입니다.
+      검증된 비주얼 디렉팅 역량과 AI 기술을 결합하여 압도적인 속도와 밀도의 영상 컨텐츠를 제작하는 아티스트 <strong>spp(스프)</strong>입니다.
     </p>
     
     <div class="hero-profile-tags">
